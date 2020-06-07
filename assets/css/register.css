@@ -1,0 +1,94 @@
+* {
+    color: white;
+}
+
+body {
+	background-color: #000;
+    background-image: url(../images/bg.jpg);
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif, Helvetica, sans-serif;
+}
+/* Containers */
+#inputContainer {
+    display: flex;
+    justify-content: space-evenly;
+    width: 80%;
+    margin: 9rem auto 0 auto;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+}
+/* Forms */
+
+input {
+    background: none;
+    border: none;
+    border-bottom: 1px solid white;
+    color: white;
+    padding: .5rem;
+    outline: none;
+}
+
+input::placeholder {
+    color: white;
+    font-weight: bold;
+}
+
+label {
+    color: #c1c1c1ee;
+    font-size: .9rem;
+}
+
+.btn {
+    width: 100%;
+    border-radius: 15px;
+    text-transform: uppercase;
+    background: none;
+    color: white;
+    font-weight: 600;
+    padding: 5px;
+    margin-top: 1rem;
+    font-size: .8rem;
+    border: 2px solid white;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
+#registerLink {
+    display: block;
+    font-size: .6rem;
+    text-align: center;
+    margin-top: .7rem;
+}
+
+.separator {
+    height: 17rem;
+    width: 2px;
+    background: #a0a0a0;
+}
+
+.register {
+    display: none;
+}
+
+/* Right section */
+.right-section > h1 {
+    color: #2ED760;
+    font-size: 3rem;
+}
+
+.right-section > p {
+    font-size: 1.3rem;
+}
+
+.right-section > ul > li {
+    line-height: 2rem;
+    letter-spacing: .6px;
+}
