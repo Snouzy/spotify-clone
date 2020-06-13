@@ -1,91 +1,118 @@
-<!DOCTYPE html>
-<html lang="fr">
+<?php 
+
+function sanitizeFormPassword($inputText) {
+	$inputText = strip_tags($inputText);
+	return $inputText;
+}
+
+function sanitizeFormUsername($inputText) {
+	$inputText = strip_tags($inputText);
+	$inputText = str_replace(" ", "", $inputText);
+	return $inputText;
+}
+
+function sanitizeFormString($inputText) {
+	$inputText = strip_tags($inputText);
+	$inputText = str_replace(" ", "", $inputText);
+	$inputText = ucfirst(strtolower($inputText));
+	return $inputText;
+}
+
+if(isset($_POST['loginButton'])) {
+	//Login button was pressed
+	
+}
+
+if(isset($_POST['registerButton'])) {
+	//Register button was pressed
+	$username = sanitizeFormUsername($_POST['username']);
+	
+	$firstName = sanitizeFormString($_POST['firstName']);
+
+	$lastName = sanitizeFormString($_POST['lastName']);
+
+	$email = sanitizeFormString($_POST['email']);
+
+	$email2 = sanitizeFormString($_POST['email2']);
+
+	$password = sanitizeFormPassword($_POST['password']);
+
+	$password2 = sanitizeFormPassword($_POST['password2']);
+
+}
+
+
+?>
+
+
+
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion</title>
-    <link rel="stylesheet" href="assets/css/register.css">
+	<title>Welcome to Slotify!</title>
 </head>
 <body>
-    <div id="inputContainer">
-        <!-- Left section start -->
-        <div class="left-section">
-            <!-- Login start -->
-            <div class="login">
-                <form action="register.php" id="loginForm" method="POST">
-                    <h2>Connectez-vous !</h2>
 
-                    <div class="form-group">
-                        <label for="loginUsername">Pseudo</label>
-                        <input id="loginUsername" name="loginUsername" type="text" placeholder="snouzy" required>
-                    </div>
+	<div id="inputContainer">
+		<form id="loginForm" action="register.php" method="POST">
+			<h2>Login to your account</h2>
+			<p>
+				<label for="loginUsername">Username</label>
+				<input id="loginUsername" name="loginUsername" type="text" placeholder="e.g. bartSimpson" required>
+			</p>
+			<p>
+				<label for="loginPassword">Password</label>
+				<input id="loginPassword" name="loginPassword" type="password" placeholder="Your password" required>
+			</p>
 
-                    <div class="form-group">
-                        <label for="loginPassword">Mot de passe</label>
-                        <input id="loginPassword" name="loginPassword" type="password" placeholder="Mot de passe" required>
-                    </div>
+			<button type="submit" name="loginButton">LOG IN</button>
+			
+		</form>
 
-                    <button type="submit" class="btn btn-login" id="loginBtn">Se connecter</button>
-                    <span id="registerLink">Pas encore de compte ? Créez le votre <a href="">ici.</a></span>
 
-                </form>
-            </div>
-            <!-- Login end -->
 
-            <!-- Register start -->
-            <div class="register">
-                <form action="register.php" id="registerForm" method="POST">
-                    <h2>Créez votre compte gratuitement !</h2>
+		<form id="registerForm" action="register.php" method="POST">
+			<h2>Create your free account</h2>
+			<p>
+				<label for="username">Username</label>
+				<input id="username" name="username" type="text" placeholder="e.g. bartSimpson" required>
+			</p>
 
-                    <div class="form-group">
-                        <label for="registerUsername">Pseudo : </label>
-                        <input id="registerUsername" name="registerUsername" type="text" placeholder="snouzy" required>
-                    </div>
+			<p>
+				<label for="firstName">First name</label>
+				<input id="firstName" name="firstName" type="text" placeholder="e.g. Bart" required>
+			</p>
 
-                    <div class="form-group">
-                        <label for="registerFirstName">Nom : </label>
-                        <input id="registerFirstName" name="registerFirstName" type="text" placeholder="Bradiceanu" required>
-                    </div>
+			<p>
+				<label for="lastName">Last name</label>
+				<input id="lastName" name="lastName" type="text" placeholder="e.g. Simpson" required>
+			</p>
 
-                    <div class="form-group">
-                        <label for="registerLastName">Prénom : </label>
-                        <input id="registerLastName" name="registerLastName" type="text" placeholder="Mathias" required>
-                    </div>
+			<p>
+				<label for="email">Email</label>
+				<input id="email" name="email" type="email" placeholder="e.g. bart@gmail.com" required>
+			</p>
 
-                    <div class="form-group">
-                        <label for="registerEmail">Email : </label>
-                        <input id="registerEmail" name="registerEmail" type="text" placeholder="mathiasnouzy@gmail.com" required>
-                    </div>
+			<p>
+				<label for="email2">Confirm email</label>
+				<input id="email2" name="email2" type="email" placeholder="e.g. bart@gmail.com" required>
+			</p>
 
-                    <div class="form-group">
-                        <label for="registerPassword">Password</label>
-                        <input id="registerPassword" name="registerPassword" type="password" required>
-                    </div>
+			<p>
+				<label for="password">Password</label>
+				<input id="password" name="password" type="password" placeholder="Your password" required>
+			</p>
 
-                    <button class="btn btn-register" id="btnRegister" type="submit">S'enregistrer</button>
-                </form>
-            </div>
-            <!-- Register end -->
-        </div>
-        <!-- Left section end -->
-        <div class="separator"></div>
-        <!-- Right section start -->
-        <div class="right-section">
-            <h1>Écoutez la musique, <br/> qui vous correspond.</h1>
-            <p>Écoutez plus de 1000 morceaux gratuitement</p>
+			<p>
+				<label for="password2">Confirm password</label>
+				<input id="password2" name="password2" type="password" placeholder="Your password" required>
+			</p>
 
-            <ul>
-                <li>Découvrez de la musique</li>
-                <li>Créez vos propres playlists</li>
-                <li>Suivez des artistes pour être à jour</li>
-            </ul>
-        </div>
-        <!-- Right section end -->
-    </div>
-    <!-- inputContainer end -->
+			<button type="submit" name="registerButton">SIGN UP</button>
+			
+		</form>
 
-    <script
-src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="assets/js/register.js"></script>
+
+	</div>
+
 </body>
 </html>
