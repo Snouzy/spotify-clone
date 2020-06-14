@@ -1,3 +1,5 @@
+
+
 <html>
 <head>
 	<title>Welcome to Slotify!</title>
