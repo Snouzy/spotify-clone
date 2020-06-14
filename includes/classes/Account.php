@@ -8,7 +8,6 @@ class Account {
     public function __construct($con) {
         $this->errorArray = [];
         $this->con = $con;
-        echo '<pre>' . print_r($con, 1) . '</pre>';
     }
 
     public function register($username, $firstName, $lastName, $email, $email2, $password, $password2) {
@@ -32,12 +31,26 @@ class Account {
         return "<span class='error-message'>$error</span>";
     }
 
+    public function login($un, $pw) {
+        $pw = md5($pw);
+        $query = mysqli_query($this->con, "SELECT * FROM users WHERE username = '$un' AND password = '$pw'");
+        if(mysqli_num_rows($query) == 1) {
+            echo '<pre>' . print_r(mysqli_num_rows($query), 1) . '</pre>';
+            return true;
+        }
+        else {
+            echo '<pre>' . print_r(mysqli_num_rows($query), 1) . '</pre>';
+            array_push($this->errorArray, Constants::$loginFailed);
+            return false;
+        }
+    }
+
     private function insertUserDetails($un, $fn, $ln, $em, $pw) {
         $encryptedPw = md5($pw);
         $profilePic = "assets/images/profil-pics/head_emerald.png";
         $date = date("Y-m-d");
 
-        $result = mysqli_query($this->con, "INSERT INTO users VALUES (null, '$un', '$fn', '$ln', '$em', '$encryptedPw', '$date', '$profilePic')");
+        $result = mysqli_query($this->con, "INSERT INTO users VALUES (NULL, '$un', '$fn', '$ln', '$em', '$encryptedPw', '$date', '$profilePic')");
 
         return $result;
     }
@@ -48,7 +61,12 @@ class Account {
             return;
         }
 
-        //TODO: check if username exists
+        // check if username exists
+        $checkUsernameQuery = mysqli_query($this->con, "SELECT username FROM users WHERE username='$un'");
+        if(mysqli_num_rows($checkUsernameQuery) != 0) {
+            array_push($this->errorArray, Constants::$usernameTaken);
+            return;
+        }
     }
 
     private function validateFirstName($firstName) {
@@ -76,7 +94,12 @@ class Account {
             return;
         }
 
-        //TODO: check that username hasn't already be used
+        //TODO: check that email hasn't already be used
+        $checkEmailQuery = mysqli_query($this->con, "SELECT email FROM users WHERE email='$un'");
+        if(mysqli_num_rows($checkEmailQuery) != 0) {
+            array_push($this->errorArray, Constants::$emailTaken);
+            return;
+        }
     }
 
     private function validatePasswords($pw, $pw2) {

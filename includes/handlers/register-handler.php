@@ -17,8 +17,6 @@
         return $inputText;
     }
 
-
-
     if(isset($_POST['registerButton'])) {
         //Register button was pressed
         $username = sanitizeFormUsername($_POST['username']);
@@ -32,6 +30,7 @@
         $wasSuccessful = $account->register($username, $firstName, $lastName, $email, $email2, $password, $password2);
 
         if($wasSuccessful) {
+            $_SESSION['userLoggedIn'] = $username;
             header("Location: index.php");
         }
     }
