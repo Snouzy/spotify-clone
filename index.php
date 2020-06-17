@@ -11,11 +11,18 @@
 ?>
 <html>
 <head>
-	<title>Welcome to Slotify!</title>
+    <title>Welcome to Slotify!</title>
+    <link rel="stylesheet" href="assets/css/main.css">
 </head>
 
 <body>
-	Hello!
+	<div id="nowPlayingBarContainer">
+        <div id="nowPlayingBar">
+            <div id="nowPlayingLeft"></div>
+            <div id="nowPlayingCenter"></div>
+            <div id="nowPlayingRight"></div>
+        </div>
+    </div>
 </body>
 
 </html>
