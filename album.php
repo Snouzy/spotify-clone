@@ -19,18 +19,10 @@ mysqli_stmt_fetch($stmt);
 /* Fermeture de la requête */
 mysqli_stmt_close($stmt);
 
-/**
- * Getting the artist
- */
-$artistStmt = mysqli_prepare($con, "SELECT `name` FROM `artists` WHERE id=?");
-mysqli_stmt_bind_param($artistStmt, "i", $artist);
-mysqli_stmt_execute($artistStmt);
-mysqli_stmt_bind_result($artistStmt, $name);
-mysqli_stmt_fetch($artistStmt);
-echo $name;
-
-mysqli_stmt_close($artistStmt);
-
+$artist = new Artist($con, $id);
+echo "here is the artist clas";
+$artist->getName();
+echo '<pre>' . print_r($artist, 1) . '</pre>';
 ?>
 
 <?php include("includes/footer.php"); ?>
