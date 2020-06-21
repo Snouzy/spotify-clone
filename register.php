@@ -72,11 +72,11 @@
 					
 				</form>
 
-
-
 				<form id="registerForm" action="register.php" method="POST">
 					<h2>Create your free account</h2>
 					<p>
+                    <?php echo '<pre>' . print_r("yo", 1) . '</pre>'; ?>
+                    <?php echo '<pre>' . print_r($account->$errorArray, 1) . '</pre>'; ?>
 						<?php echo $account->getError(Constants::$usernameCharacters); ?>
 						<?php echo $account->getError(Constants::$usernameTaken); ?>
 						<label for="username">Username</label>

@@ -2,7 +2,7 @@
 	class Account {
 
 		private $con;
-		private $errorArray;
+		public static $errorArray;
 
 		public function __construct($con) {
 			$this->con = $con;
@@ -26,7 +26,7 @@
 		}
 
 		public function register($un, $fn, $ln, $em, $em2, $pw, $pw2) {
-			$this->validateUsername($un);
+            $this->validateUsername($un);
 			$this->validateFirstName($fn);
 			$this->validateLastName($ln);
 			$this->validateEmails($em, $em2);
@@ -54,8 +54,8 @@
 			$profilePic = "assets/images/profile-pics/head_emerald.png";
 			$date = date("Y-m-d");
 
-			$result = mysqli_query($this->con, "INSERT INTO users VALUES ('', '$un', '$fn', '$ln', '$em', '$encryptedPw', '$date', '$profilePic')");
-
+            $result = mysqli_query($this->con, "INSERT INTO users VALUES (NULL, '$un', '$fn', '$ln', '$em', '$encryptedPw', '$date', '$profilePic')");
+            
 			return $result;
 		}
 
@@ -66,12 +66,12 @@
 				return;
 			}
 
-			$checkUsernameQuery = mysqli_query($this->con, "SELECT username FROM users WHERE username='$un'");
+            $checkUsernameQuery = mysqli_query($this->con, "SELECT username FROM users WHERE username='$un'");
 			if(mysqli_num_rows($checkUsernameQuery) != 0) {
 				array_push($this->errorArray, Constants::$usernameTaken);
 				return;
 			}
-
+            //OK
 		}
 
 		private function validateFirstName($fn) {
