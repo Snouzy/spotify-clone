@@ -109,7 +109,7 @@
 					</p>
 
 					<p>
-						<?php echo $account->getError(Constants::$passwordDoNotMatch); ?>
+						<?php echo $account->getError(Constants::$passwordsDoNoMatch); ?>
 						<?php echo $account->getError(Constants::$passwordNotAlphanumeric); ?>
 						<?php echo $account->getError(Constants::$passwordCharacters); ?>
 						<label for="password">Password</label>
