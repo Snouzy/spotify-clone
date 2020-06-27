@@ -4,25 +4,23 @@ if(isset($_GET['id'])) {
     $albumId = $_GET['id'];
 } else header("Location: index.php");
 
-/**
- * Getting the album
- */
-$stmt = mysqli_prepare($con, "SELECT * FROM `albums` WHERE id=?");
-/* Lecture des marqueurs */
-mysqli_stmt_bind_param($stmt, "i", $albumId);
-/* Exécution de la requête */
-mysqli_stmt_execute($stmt);
-/* Lecture des variables résultantes */
-mysqli_stmt_bind_result($stmt, $id, $title, $artist, $genre, $artworkPath);
-/* Récupération des valeurs */
-mysqli_stmt_fetch($stmt);
-/* Fermeture de la requête */
-mysqli_stmt_close($stmt);
 
-$artist = new Artist($con, $id);
-echo "here is the artist clas";
-$artist->getName();
-echo '<pre>' . print_r($artist, 1) . '</pre>';
+$album = new Album($con, $albumId);
+$artist =  new Artist($con, $_GET['id']);
+
 ?>
+
+<div class="entityInfo">
+
+    <div class="leftSection">
+        <img src="<?=$album->getArtworkPath();?>" alt="">
+    </div>
+    <div class="rightSection">
+        <h2><?=$album->getTitle()?></h2>
+        <span>By <?=$artist->getName()?></span>
+        <p><?= $album->getNumberOfSongs() > 1 ? $album->getNumberOfSongs() . " songs" : $album->getNumberOfSongs() . " song" ?></p>
+    </div>
+
+</div>
 
 <?php include("includes/footer.php"); ?>

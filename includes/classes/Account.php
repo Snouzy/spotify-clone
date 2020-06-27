@@ -17,8 +17,7 @@
 
 			if(mysqli_num_rows($query) == 1) {
 				return true;
-			}
-			else {
+			} else {
 				array_push($this->errorArray, Constants::$loginFailed);
 				return false;
 			}

@@ -10,12 +10,12 @@ class Artist {
     }
 
     public function getName() {
-        $artistStmt = mysqli_prepare($con, "SELECT `name` FROM `artists` WHERE id=?");
+        $artistStmt = mysqli_prepare($this->con, "SELECT `name` FROM `artists` WHERE id=?");
         mysqli_stmt_bind_param($artistStmt, "i", $this->id);
         mysqli_stmt_execute($artistStmt);
         mysqli_stmt_bind_result($artistStmt, $name);
         mysqli_stmt_fetch($artistStmt);
         mysqli_stmt_close($artistStmt);
-        return $name;
+        echo $name;
     }
 }
