@@ -16,6 +16,6 @@ class Artist {
         mysqli_stmt_bind_result($artistStmt, $name);
         mysqli_stmt_fetch($artistStmt);
         mysqli_stmt_close($artistStmt);
-        echo $name;
+        return $name;
     }
 }

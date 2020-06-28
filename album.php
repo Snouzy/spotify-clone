@@ -23,4 +23,36 @@ $artist =  new Artist($con, $_GET['id']);
 
 </div>
 
+<div class="tracklistContainer">
+    <ul class="tracklist">
+        <?php
+            $songIdArray = $album->getSongIds();
+            foreach ($songIdArray as $key => $songId) {
+                $albumSong = new Song($con, $songId);
+                $albumArtist = $albumSong->getArtist();
+                echo "
+                <li class='tracklistRow'>
+                    <div class='trackCount'>
+                        <img class='play' src='assets/images/icons/play-white.png'/>
+                        <span class='trackNumber'>" . intval($key+1) . "</span>
+                    </div>
+
+                    <div class='trackInfo'>
+                        <span class='trackName'>" . $albumSong->getTitle() . "</span>
+                        <span class='artistName'>" . $albumArtist->getName() . "</span>
+                    </div>
+
+                    <div class='trackOptions'>
+                        <img class='optionsButton' src='assets/images/icons/more.png' />
+                    </div>
+
+                    <div class='trackDuration'>
+                        <span class='duration'>" . $albumSong->getDuration() . "</span>
+                    </div>
+                </li>";
+            }
+        ?>
+    </ul>
+</div>
+
 <?php include("includes/footer.php"); ?>
